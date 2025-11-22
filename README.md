@@ -1,2 +1,53 @@
-# stcr
-single cell tcr simple information theoretic functions
+# **STCR**
+Information Theoretic Framework for Paired Single Cell Gene Expression and TCR Sequencing
+
+![alt text](https://github.com/nceglia/stcr/blob/main/framework.png?raw=true)
+
+https://www.biorxiv.org/content/10.1101/2022.10.01.510457v1
+
+
+Install:
+
+```
+python3 -m venv tvenv
+source tvenv/bin/activate
+python3 setup.py install
+```
+
+
+Example code found in /examples.
+
+### Basics
+
+#### Compute joint distribution with STCR on anndata processed with GeneVector.
+```
+import stcr
+
+sample_column="sample"
+condition_column="source"
+phenotype_column="genevector"
+
+stcr.pp.joint_distribution(adata,
+                           sample_column=sample_column, 
+                           condition_column=condition_column, 
+                           phenotype_column=phenotype_column)
+```
+                
+#### Each metric has an associated plotting function
+1. Clonotypic Entropy
+    ```
+    stcr.metrics.clonotypic_entropy(adata)
+    stcr.pl.clonotypic_entropy(adata)
+    ```
+2. Phenotypic Entropy
+    ```
+    stcr.metrics.phenotypic_entropy(adata)
+    stcr.pl.phenotypic_entropy(adata)
+    ```
+3. Phenotypic Flux
+    ```
+    stcr.metrics.phenotypic_flux(adata,from_this="TP1",to_that="TP2")
+    stcr.pl.phenotypic_flux(adata,from_this="TP1",to_that="TP2")
+    ```
+
+
